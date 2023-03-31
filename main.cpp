@@ -18,16 +18,13 @@ int main(int argc, char **argv)
         m.push_back(t);
     }
 
-    int vt = 0;
-    for (size_t i = 0; i < m.size(); i++)
+    const size_t height = m.size() - 1;
+    const size_t width = m.front().size() - 1;
+    size_t vt =  2 * (width + height);
+    for (size_t i = 1; i < height; i++)
     {
-        for (size_t j = 0; j < m[0].size(); j++)
+        for (size_t j = 1; j < width; j++)
         {
-            if (i == 0 || j == 0 || i == m.size() - 1 || j == m[0].size() - 1)
-            {
-                vt++;
-                continue;
-            }
             bool v = true;
             for (size_t k = 0; k < i; k++)
             {
@@ -43,7 +40,7 @@ int main(int argc, char **argv)
                 continue;
             }
             v = true;
-            for (size_t k = m.size() - 1; k > i; k--)
+            for (size_t k = height; k > i; k--)
             {
                 if (m[k][j] >= m[i][j])
                 {
@@ -71,7 +68,7 @@ int main(int argc, char **argv)
                 continue;
             }
             v = true;
-            for (size_t k = m[0].size() - 1; k > j; k--)
+            for (size_t k = width; k > j; k--)
             {
                 if (m[i][k] >= m[i][j])
                 {
@@ -86,37 +83,33 @@ int main(int argc, char **argv)
     std::cout << vt << std::endl;
 
     uint32_t mss = 0;
-    for (size_t i = 0; i < m.size(); i++)
+    for (size_t i = 1; i < height; i++)
     {
-        for (size_t j = 0; j < m[0].size(); j++)
+        for (size_t j = 1; j < width; j++)
         {
-            if (i == 0 || j == 0 || i == m.size() - 1 || j == m[0].size() - 1)
-            {
-                continue;
-            }
             uint32_t lss1 = 0;
-            for (int32_t k = i - 1; k >= 0; k--)
+            for (int32_t k = static_cast<int32_t>(i - 1); k >= 0; k--)
             {
                 lss1++;
                 if (m[k][j] >= m[i][j])
                     break;
             }
             uint32_t lss2 = 0;
-            for (size_t k = i + 1; k < m.size(); k++)
+            for (size_t k = i + 1; k < height + 1; k++)
             {
                 lss2++;
                 if (m[k][j] >= m[i][j])
                     break;
             }
             uint32_t lss3 = 0;
-            for (int32_t k = j - 1; k >= 0; k--)
+            for (int32_t k = static_cast<int32_t>(j - 1); k >= 0; k--)
             {
                 lss3++;
                 if (m[i][k] >= m[i][j])
                     break;
             }
             uint32_t lss4 = 0;
-            for (size_t k = j + 1; k < m[0].size(); k++)
+            for (size_t k = j + 1; k < width + 1; k++)
             {
                 lss4++;
                 if (m[i][k] >= m[i][j])

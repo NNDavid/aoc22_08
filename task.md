@@ -1,0 +1,4 @@
+The code is a solution for the 2022 Advent of Code event day8 problem's first and second part. (https://adventofcode.com/2022/day/8)
+You can acquire your own input and validate the result after authenticating on the site with one of the provided methods (GitHub, Google, Twitter, Reddit).
+The task is to "optimize" and clean up the code and improve readability and usability while maintaining or improving functionality (clean code).
+You can use any resource and language standard within reason but all decisions and modifications need to be reasoned and explained in discussion if asked about in a second round interview.

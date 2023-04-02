@@ -87,37 +87,39 @@ int main(int argc, char **argv)
     {
         for (size_t j = 1; j < width; j++)
         {
-            uint32_t lss1 = 0;
-            for (int32_t k = static_cast<int32_t>(i - 1); k >= 0; k--)
+            uint32_t lss1 = 1;
+            size_t idx = i - 1;
+            while (idx > 0 && m[idx][j] < m[i][j])
             {
+                idx--;
                 lss1++;
-                if (m[k][j] >= m[i][j])
-                    break;
             }
-            uint32_t lss2 = 0;
-            for (size_t k = i + 1; k < height + 1; k++)
+
+            uint32_t lss2 = 1;
+            idx = i + 1;
+            while (idx < height && m[idx][j] < m[i][j])
             {
                 lss2++;
-                if (m[k][j] >= m[i][j])
-                    break;
+                idx++;
             }
-            uint32_t lss3 = 0;
-            for (int32_t k = static_cast<int32_t>(j - 1); k >= 0; k--)
+
+            uint32_t lss3 = 1;
+            idx = j - 1;
+            while (idx > 0 && m[i][idx] < m[i][j])
             {
                 lss3++;
-                if (m[i][k] >= m[i][j])
-                    break;
+                idx--;
             }
-            uint32_t lss4 = 0;
-            for (size_t k = j + 1; k < width + 1; k++)
+
+            uint32_t lss4 = 1;
+            idx = j + 1;
+            while (idx < width && m[i][idx] < m[i][j])
             {
                 lss4++;
-                if (m[i][k] >= m[i][j])
-                    break;
+                idx++;
             }
-            uint32_t ss = lss1 * lss2 * lss3 * lss4;
-            if(ss > mss)
-                mss = ss;
+
+            mss = std::max(mss, lss1 * lss2 * lss3 * lss4);
         }
     }
     std::cout << mss << std::endl;

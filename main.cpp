@@ -25,59 +25,38 @@ int main(int argc, char **argv)
     {
         for (size_t j = 1; j < width; j++)
         {
-            bool v = true;
-            for (size_t k = 0; k < i; k++)
+            size_t idx = 0;
+            while (m[idx][j] < m[i][j])
             {
-                if (m[k][j] >= m[i][j])
-                {
-                    v = false;
-                    break;
-                }
+                idx++;
             }
-            if (v)
+            bool visible_top = idx == i;
+
+            idx = height;
+            while(m[idx][j] < m[i][j])
             {
-                vt++;
-                continue;
+                idx--;
             }
-            v = true;
-            for (size_t k = height; k > i; k--)
+            bool visible_bottom = idx == i;
+
+            idx = 0;
+            while (m[i][idx] < m[i][j])
             {
-                if (m[k][j] >= m[i][j])
-                {
-                    v = false;
-                    break;
-                }
+                idx++;
             }
-            if (v)
+            bool visible_left = idx == j;
+
+            idx = width;
+            while (m[i][idx] < m[i][j])
             {
-                vt++;
-                continue;
+                idx--;
             }
-            v = true;
-            for (size_t k = 0; k < j; k++)
-            {
-                if (m[i][k] >= m[i][j])
-                {
-                    v = false;
-                    break;
-                }
-            }
-            if (v)
+            bool visible_right = idx == j;
+
+            if (visible_top || visible_bottom || visible_left || visible_right)
             {
                 vt++;
-                continue;
             }
-            v = true;
-            for (size_t k = width; k > j; k--)
-            {
-                if (m[i][k] >= m[i][j])
-                {
-                    v = false;
-                    break;
-                }
-            }
-            if (v)
-                vt++;
         }
     }
     std::cout << vt << std::endl;

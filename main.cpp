@@ -10,12 +10,11 @@ int main(int argc, char **argv)
     std::vector<std::vector<uint8_t>> m;
     while (std::getline(inf, l))
     {
-        std::vector<uint8_t> t;
+        m.emplace_back(std::vector<uint8_t>(l.size()));
         for (int i = 0; i < l.size(); i++)
         {
-            t.push_back(l[i] - '0');
+            m.back()[i] = l[i] - '0';
         }
-        m.push_back(t);
     }
 
     const size_t height = m.size() - 1;

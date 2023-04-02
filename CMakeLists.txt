@@ -4,4 +4,4 @@ project(aoc22_8)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(aoc22_8 main.cpp)
+add_executable(aoc22_8 Day8.h Day8.cpp main.cpp)
